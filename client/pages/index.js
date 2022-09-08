@@ -1,63 +1,136 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "tailwindcss/tailwind.css";
 import Header from "../components/Header";
 import patientImg from "../assets/face-mask-man-icon.svg";
 import doctorImg from "../assets/doctor-stethoscope-svgrepo-com.svg";
 import insurImg from "../assets/health-insurance-svgrepo-com.svg";
+import Layout from "../components/Layout";
+
+import { useRouter } from "next/router";
+import useWeb3Provider from "../hooks/useWeb3Provider";
+import { web3Context } from "../context/web3providerContext";
 
 const index = () => {
-  return (
-    <div>
-      <Header />
+  const router = useRouter();
+  const { web3Provider, setWeb3Provider } = useContext(web3Context);
 
-      <div class="container mx-auto my-5 px-5">
+  async function connectWallet(num) {
+    const [web3] = await useWeb3Provider();
+
+    if (web3) {
+      setWeb3Provider(web3);
+      if (num === 1) router.push("patientProfile");
+      else if (num === 2) router.push("docDash");
+      else if (num === 3) router.push("insDash");
+    }
+  }
+  return (
+    <Layout>
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto flex flex-wrap">
+          <div className="lg:w-2/3 mx-auto">
+            <div className="flex flex-wrap w-full bg-gray-100 py-5 px-10 relative mb-4 border-solid border-8 border-indigo-600">
+              <div className="container px-5 py-5 mx-auto flex flex-wrap items-center ">
+                <div className="lg:w-2/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+                  <img src={patientImg.src} className="h-32 mx-auto" />
+                  <h2 className="text-gray-900 text-lg font-medium title-font mb-5 text-center">
+                    Patient Login
+                  </h2>
+                </div>
+                <div className="ml-auto lg:w-3/5 md:w-1/2 bg-gray-900 rounded-lg p-8  flex flex-col md:ml-auto w-full shadow-2lg shadow-indigo-500/40">
+                  <h2 className="text-gray-100 text-lg font-medium title-font mb-5 text-center">
+                    Connect your cryptowallet to get started
+                  </h2>
+
+                  <button
+                    onClick={() => connectWallet(1)}
+                    className="w-1/2 mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                  >
+                    Connect
+                  </button>
+                  <p className="text-xs text-gray-500 mt-3">
+                    There is no registeration required. Your profile will be
+                    linked to your crypto-account.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-2">
+              <div className="px-2 w-1/2">
+                <div class="block rounded-lg shadow-lg border-solid border-8 border-indigo-600  text-center">
+                  <div class="py-3 px-6 border-b border-gray-300">
+                    <img src={doctorImg.src} className="h-32 mx-auto" />
+                  </div>
+                  <div class="p-6">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">
+                      Doctor's Login
+                    </h5>
+                    <p class="text-gray-700 text-base mb-4">
+                      Login to your account by connecting your wallet, if your
+                      profile has been verified.
+                    </p>
+                    <button
+                      onClick={() => connectWallet(2)}
+                      type="button"
+                      class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    >
+                      Connect
+                    </button>
+                  </div>
+                  <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
+                    To set-up your account click here
+                  </div>
+                </div>
+              </div>
+              <div className="px-2 w-1/2">
+                <div class="block rounded-lg shadow-lg bg-white border-solid border-8 border-indigo-600  text-center">
+                  <div class="py-3 px-6 border-b border-gray-300">
+                    <img src={insurImg.src} className="h-32 mx-auto" />
+                  </div>
+                  <div class="p-6">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">
+                      Insurance Org Login
+                    </h5>
+                    <p class="text-gray-700 text-base mb-4">
+                      Login to your account by connecting your wallet, if your
+                      profile has been verified.
+                    </p>
+                    <button
+                      onClick={() => connectWallet(3)}
+                      type="button"
+                      class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    >
+                      Connect
+                    </button>
+                  </div>
+                  <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
+                    To set-up your account click here
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* <div class="container mx-auto my-5 px-5">
         <div class="grid px-5 m-5 overflow-hidden grid-cols-2 grid-rows-2 gap-6 grid-flow-row">
           <div className="text-gray-600 body-font col-span-2 shadow-lg bg-[#8C95D0] ">
             <div className="container px-5  mx-auto flex flex-wrap items-center">
-              <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+              <div className="m-5 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
                 <img src={patientImg.src} className="h-32 mx-auto" />
                 <h1 className="title-font font-medium text-3xl text-gray-900">
-                  Slow-carb next level shoindcgoitch ethical authentic, poko
-                  scenester
+                  Doctor's Login
                 </h1>
                 <p className="leading-relaxed mt-4">
-                  Poke slow-carb mixtape knausgaard, typewriter street art
-                  gentrify hammock starladder roathse. Craies vegan tousled etsy
-                  austin.
+                  Login to your account by connecting your wallet, if your
+                  profile has been verified.
                 </p>
               </div>
-              <div className="my-5 lg:w-2/6 md:w-1/2 bg-gray-900 rounded-lg p-8  flex flex-col md:ml-auto w-full shadow-2lg shadow-indigo-500/40">
+              <div className="m-5 lg:w-2/6 md:w-1/2 bg-gray-900 rounded-lg p-8  flex flex-col md:ml-auto w-full shadow-2lg shadow-indigo-500/40">
                 <h2 className="text-gray-100 text-lg font-medium title-font mb-5">
                   Sign Up
                 </h2>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="full-name"
-                    className="leading-7 text-sm text-gray-600"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="full-name"
-                    name="full-name"
-                    className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
-                </div>
-                <div className="relative mb-4">
-                  <label
-                    htmlFor="email"
-                    className="leading-7 text-sm text-gray-600"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
-                </div>
+
                 <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
                   Button
                 </button>
@@ -75,11 +148,11 @@ const index = () => {
               </div>
               <div class="p-6">
                 <h5 class="text-gray-900 text-xl font-medium mb-2">
-                  Special title treatment
+                  Insurance Organisation Login
                 </h5>
                 <p class="text-gray-700 text-base mb-4">
-                  With supporting text below as a natural lead-in to additional
-                  content.
+                  Login to your account by connecting your wallet, if your
+                  profile has been verified.
                 </p>
                 <button
                   type="button"
@@ -96,7 +169,6 @@ const index = () => {
           <div class="flex justify-center">
             <div class="block rounded-lg shadow-lg bg-white border-solid border-8 border-indigo-600 max-w-sm text-center">
               <div class="py-3 px-6 border-b border-gray-300">
-                {" "}
                 <img src={insurImg.src} className="h-32 mx-auto" />
               </div>
               <div class="p-6">
@@ -328,8 +400,8 @@ const index = () => {
             </div>
           </div>
         </div>
-      </section> */}
-    </div>
+      </section> */}{" "}
+    </Layout>
   );
 };
 
