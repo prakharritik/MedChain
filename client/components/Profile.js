@@ -1,6 +1,8 @@
 import React from "react";
 
-const Profile = ({ profile: { name, phno, city, gender, insurance, dob } }) => {
+const Profile = ({
+  profile: { name, phno, city, gender, insurance, dob, email },
+}) => {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
@@ -20,6 +22,12 @@ const Profile = ({ profile: { name, phno, city, gender, insurance, dob } }) => {
             <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
               {phno}
+            </dd>
+          </div>
+          <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt className="text-sm font-medium text-gray-500">Email</dt>
+            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+              {email}
             </dd>
           </div>
           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

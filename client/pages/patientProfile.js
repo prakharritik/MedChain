@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { web3Context } from "../context/web3providerContext";
-import Layout from "../components/Layout";
-import useWeb3Provider from "../hooks/useWeb3Provider";
+import ProtectedLayout from "../components/ProtectedLayout";
 import Profile from "../components/Profile";
 import Records from "../components/Records";
 import useContract from "../hooks/useContract";
@@ -10,7 +9,7 @@ import Loading from "../components/Loading";
 
 const Tabs = () => {
   const [openTab, setOpenTab] = useState(1);
-  const { web3Provider, setWeb3Provider } = useContext(web3Context);
+  const { web3Provider } = useContext(web3Context);
   const router = useRouter();
 
   const [profile, setProfile] = useState(null);
@@ -19,36 +18,35 @@ const Tabs = () => {
 
   useEffect(() => {
     setLoading(true);
-    if (!web3Provider) {
-      router.push("/");
-    } else {
-      const conn = async () => {
-        const [account] = await web3Provider.eth.getAccounts();
-        console.log(account);
-        const instance = useContract(web3Provider);
-        const res = await instance.methods.getPatient(account).call();
-        const records = await instance.methods.getRecords(account).call();
-        setRecords(records);
-        console.log(records);
-        if (res["name"] == "") router.push("/patientRegister");
-        else {
-          setProfile({
-            city: res["city"],
-            dob: res["dob"],
-            gender: res["gender"],
-            insurance: res["insurance"],
-            name: res["name"],
-            phno: res["phno"],
-          });
-        }
-      };
-      conn();
-    }
+
+    const conn = async () => {
+      const [account] = await web3Provider.eth.getAccounts();
+
+      const instance = useContract(web3Provider);
+      const res = await instance.methods.getPatient(account).call();
+      const records = await instance.methods.getRecords(account).call();
+      setRecords(records);
+      console.log(records);
+      if (res["name"] == "") router.push("/patientRegister");
+      else {
+        setProfile({
+          city: res["city"],
+          dob: res["dob"],
+          gender: res["gender"],
+          insurance: res["insurance"],
+          email: res["email"],
+          name: res["name"],
+          phno: res["phno"],
+        });
+      }
+    };
+    conn();
+
     setLoading(false);
   }, []);
 
   return (
-    <Layout>
+    <ProtectedLayout>
       {loading || !profile ? (
         <Loading />
       ) : (
@@ -143,7 +141,7 @@ const Tabs = () => {
           </div>
         </div>
       )}
-    </Layout>
+    </ProtectedLayout>
   );
 };
 

@@ -1,44 +1,34 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
+import ProtectedLayout from "../components/ProtectedLayout";
+import { web3Context } from "../context/web3providerContext";
+import useContract from "../hooks/useContract";
 
 const docLogin = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [speciality, setSpeciality] = useState("");
+  const [qualificaton, setQualificaton] = useState("");
+  const [phno, setPhno] = useState("");
+  const [hospital, setHospital] = useState("");
+  const { web3Provider } = useContext(web3Context);
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    const [account] = await web3Provider.eth.getAccounts();
+    console.log(account);
+    const instance = useContract(web3Provider);
+    try {
+      const res = await instance.methods
+        .addDoctor(name, speciality, qualification, email, phno, hospital)
+        .send({
+          from: account,
+        });
+    } catch (err) {}
+  };
+
   return (
-    <div>
-      <div className="my-5 lg:w-2/6 md:w-1/2 bg-gray-900 rounded-lg p-8  flex flex-col md:m-auto w-full shadow-2lg shadow-indigo-500/40">
-        <h2 className="text-gray-100 text-lg font-medium title-font mb-5">
-          Sign Up
-        </h2>
-        <div className="relative mb-4">
-          <label
-            htmlFor="full-name"
-            className="leading-7 text-sm text-gray-600"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="full-name"
-            name="full-name"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <div className="relative mb-4">
-          <label htmlFor="email" className="leading-7 text-sm text-gray-600">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Button
-        </button>
-        <p className="text-xs text-gray-500 mt-3">
-          Literally you probably haven't heard of them jean shorts.
-        </p>
-      </div>
+    <ProtectedLayout>
       <section className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
@@ -46,8 +36,8 @@ const docLogin = () => {
               Doctor Registeration
             </h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify.
+              Please fill the following details. They will be used in
+              verification.
             </p>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
@@ -64,6 +54,8 @@ const docLogin = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
@@ -80,6 +72,8 @@ const docLogin = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
@@ -96,6 +90,8 @@ const docLogin = () => {
                     type="text"
                     id="Speciality"
                     name="Speciality"
+                    value={speciality}
+                    onChange={(e) => setSpeciality(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
@@ -112,14 +108,55 @@ const docLogin = () => {
                     type="text"
                     id="qualification"
                     name="qualification"
+                    value={qualificaton}
+                    onChange={(e) => setQualificaton(e.target.value)}
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  />
+                </div>
+              </div>
+              <div className="p-2 w-1/2">
+                <div className="relative">
+                  <label
+                    htmlFor="phno"
+                    className="leading-7 text-sm text-gray-600"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    id="phno"
+                    name="phno"
+                    value={phno}
+                    onChange={(e) => setPhno(e.target.value)}
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                  />
+                </div>
+              </div>
+              <div className="p-2 w-1/2">
+                <div className="relative">
+                  <label
+                    htmlFor="Hospital"
+                    className="leading-7 text-sm text-gray-600"
+                  >
+                    Hospital / Pvt Clinic (specify name and address)
+                  </label>
+                  <input
+                    type="text"
+                    id="Hospital"
+                    name="Hospital"
+                    value={hospital}
+                    onChange={(e) => setHospital(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
 
               <div className="p-2 w-full">
-                <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Button
+                <button
+                  onClick={handleSubmit}
+                  className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                >
+                  Submit
                 </button>
               </div>
             </div>
@@ -127,7 +164,7 @@ const docLogin = () => {
         </div>
       </section>
       ;
-    </div>
+    </ProtectedLayout>
   );
 };
 

@@ -1,8 +1,220 @@
 const abi = [
   {
+    inputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "speciality",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "qualification",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "email",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "phno",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "hospital",
+        type: "string",
+      },
+    ],
+    name: "addDoctor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "location",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "phno",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "email",
+        type: "string",
+      },
+    ],
+    name: "addPathology",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "name",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "phno",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "email",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "gender",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "city",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "dob",
+        type: "string",
+      },
+    ],
+    name: "addPatient",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "patientAddress",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "prescription",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "conclusion",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "important",
+        type: "bool",
+      },
+    ],
+    name: "addRecord",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "patientAddress",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "prescription",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "conclusion",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "important",
+        type: "bool",
+      },
+    ],
+    name: "addRecordPath",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "doctor",
+        type: "address",
+      },
+    ],
+    name: "grantAccess",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "doctor",
+        type: "address",
+      },
+    ],
+    name: "revokeAccess",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "verifyDoctor",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "index",
+        type: "uint256",
+      },
+    ],
+    name: "verifyPath",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
   },
   {
     inputs: [
@@ -34,6 +246,21 @@ const abi = [
         name: "email",
         type: "string",
       },
+      {
+        internalType: "string",
+        name: "phno",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "hospital",
+        type: "string",
+      },
+      {
+        internalType: "bool",
+        name: "verified",
+        type: "bool",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -41,128 +268,20 @@ const abi = [
   {
     inputs: [
       {
-        internalType: "string",
-        name: "name",
-        type: "string",
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
-      {
-        internalType: "string",
-        name: "speciality",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "qualification",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "email",
-        type: "string",
-      },
+    ],
+    name: "docVerifList",
+    outputs: [
       {
         internalType: "address",
-        name: "doctorAddress",
+        name: "",
         type: "address",
       },
     ],
-    name: "addDoctor",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "location",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "phno",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "email",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "pathologyAddress",
-        type: "address",
-      },
-    ],
-    name: "addPathology",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "phno",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "gender",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "city",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "dob",
-        type: "string",
-      },
-      {
-        internalType: "address",
-        name: "patientAddress",
-        type: "address",
-      },
-    ],
-    name: "addPatient",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "patientAddress",
-        type: "address",
-      },
-      {
-        internalType: "string",
-        name: "prescription",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "conclusion",
-        type: "string",
-      },
-    ],
-    name: "addRecord",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -179,6 +298,11 @@ const abi = [
         internalType: "address[]",
         name: "",
         type: "address[]",
+      },
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
       },
     ],
     stateMutability: "view",
@@ -216,10 +340,38 @@ const abi = [
             name: "email",
             type: "string",
           },
+          {
+            internalType: "string",
+            name: "phno",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "hospital",
+            type: "string",
+          },
+          {
+            internalType: "bool",
+            name: "verified",
+            type: "bool",
+          },
         ],
         internalType: "struct MedChain.Doctor",
         name: "",
         type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getDoctorVerList",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
       },
     ],
     stateMutability: "view",
@@ -257,10 +409,28 @@ const abi = [
             name: "email",
             type: "string",
           },
+          {
+            internalType: "bool",
+            name: "verified",
+            type: "bool",
+          },
         ],
         internalType: "struct MedChain.Pathology",
         name: "",
         type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getPathVerList",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
       },
     ],
     stateMutability: "view",
@@ -286,6 +456,11 @@ const abi = [
           {
             internalType: "string",
             name: "phno",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "email",
             type: "string",
           },
           {
@@ -332,6 +507,11 @@ const abi = [
         name: "",
         type: "address[]",
       },
+      {
+        internalType: "string[]",
+        name: "",
+        type: "string[]",
+      },
     ],
     stateMutability: "view",
     type: "function",
@@ -345,7 +525,7 @@ const abi = [
       },
       {
         internalType: "uint256",
-        name: "index",
+        name: "id",
         type: "uint256",
       },
     ],
@@ -367,6 +547,11 @@ const abi = [
             internalType: "string",
             name: "conclusion",
             type: "string",
+          },
+          {
+            internalType: "bool",
+            name: "important",
+            type: "bool",
           },
         ],
         internalType: "struct MedChain.Record",
@@ -404,6 +589,11 @@ const abi = [
             name: "conclusion",
             type: "string",
           },
+          {
+            internalType: "bool",
+            name: "important",
+            type: "bool",
+          },
         ],
         internalType: "struct MedChain.Record[]",
         name: "",
@@ -416,27 +606,20 @@ const abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "doctor",
-        type: "address",
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
-    name: "grantAccess",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
+    name: "pathVerifList",
+    outputs: [
       {
         internalType: "address",
-        name: "doctor",
+        name: "",
         type: "address",
       },
     ],
-    name: "revokeAccess",
-    outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function",
   },
 ];

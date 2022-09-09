@@ -1,11 +1,18 @@
 import React from "react";
 
-const Loading = () => {
-  return (
-    <div className="flex justify-center items-center my-24">
+const ButtonLoading = ({ loading }) => {
+  return !loading ? (
+    <button
+      onClick={handleSubmit}
+      className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+    >
+      Submit
+    </button>
+  ) : (
+    <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
       <svg
         role="status"
-        class="inline mr-3 w-8 h-8 text-dark animate-spin"
+        class="inline mr-3 w-8 h-8 text-white animate-spin"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +27,8 @@ const Loading = () => {
         />
       </svg>
       Loading...
-    </div>
+    </button>
   );
 };
 
-export default Loading;
+export default ButtonLoading;
