@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-export default function SymptomsForm() {
-  const [symptoms, setSymptoms] = useState([]);
+export default function SymptomsForm({ symptoms, setSymptoms }) {
   const [symptom, setSymptom] = useState("");
 
   function handleInputChange(e) {

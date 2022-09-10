@@ -3,8 +3,6 @@ import Web3Modal from "web3modal";
 import Web3 from "web3";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 
-console.log("h", process.env.NEXT_PUBLIC_RINKBYID);
-
 const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider,
@@ -25,7 +23,6 @@ const providerOptions = {
 
 const useWeb3Provider = async () => {
   let web3 = null;
-  console.log("hw", process.env.NEXT_PUBLIC_RINKBYID);
 
   try {
     let web3Modal = new Web3Modal({

@@ -3,7 +3,8 @@ import "tailwindcss/tailwind.css";
 import Header from "../components/Header";
 import patientImg from "../assets/face-mask-man-icon.svg";
 import doctorImg from "../assets/doctor-stethoscope-svgrepo-com.svg";
-import insurImg from "../assets/health-insurance-svgrepo-com.svg";
+import insurImg from "../assets/health-insurance.svg";
+import pathologyImg from "../assets/pathology-cropped.svg";
 import Layout from "../components/Layout";
 
 import { useRouter } from "next/router";
@@ -12,16 +13,22 @@ import { web3Context } from "../context/web3providerContext";
 
 const index = () => {
   const router = useRouter();
-  const { web3Provider, setWeb3Provider } = useContext(web3Context);
+  const { web3Provider, setWeb3Provider, setRole } = useContext(web3Context);
+
+  useEffect(() => {
+    setRole(0);
+  }, []);
 
   async function connectWallet(num) {
     const [web3] = await useWeb3Provider();
 
     if (web3) {
       setWeb3Provider(web3);
+      setRole(num);
       if (num === 1) router.push("patientProfile");
       else if (num === 2) router.push("docDash");
       else if (num === 3) router.push("insDash");
+      //  else if (num === 4)router.push()
     }
   }
   return (
@@ -56,7 +63,7 @@ const index = () => {
               </div>
             </div>
             <div className="flex flex-wrap -mx-2">
-              <div className="px-2 w-1/2">
+              <div className="px-2 w-1/3">
                 <div class="block rounded-lg shadow-lg border-solid border-8 border-indigo-600  text-center">
                   <div class="py-3 px-6 border-b border-gray-300">
                     <img src={doctorImg.src} className="h-32 mx-auto" />
@@ -77,12 +84,32 @@ const index = () => {
                       Connect
                     </button>
                   </div>
-                  <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
-                    To set-up your account click here
+                </div>
+              </div>{" "}
+              <div className="px-2 w-1/3">
+                <div class="block rounded-lg shadow-lg border-solid border-8 border-indigo-600  text-center">
+                  <div class="py-3 px-6 border-b border-gray-300">
+                    <img src={pathologyImg.src} className="h-32 mx-auto" />
+                  </div>
+                  <div class="p-6">
+                    <h5 class="text-gray-900 text-xl font-medium mb-2">
+                      Pathology's Login
+                    </h5>
+                    <p class="text-gray-700 text-base mb-4">
+                      Login to your account by connecting your wallet, if your
+                      profile has been verified.
+                    </p>
+                    <button
+                      onClick={() => connectWallet(2)}
+                      type="button"
+                      class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    >
+                      Connect
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className="px-2 w-1/2">
+              <div className="px-2 w-1/3">
                 <div class="block rounded-lg shadow-lg bg-white border-solid border-8 border-indigo-600  text-center">
                   <div class="py-3 px-6 border-b border-gray-300">
                     <img src={insurImg.src} className="h-32 mx-auto" />
@@ -102,9 +129,6 @@ const index = () => {
                     >
                       Connect
                     </button>
-                  </div>
-                  <div class="py-3 px-6 border-t border-gray-300 text-gray-600">
-                    To set-up your account click here
                   </div>
                 </div>
               </div>

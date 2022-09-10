@@ -1,12 +1,12 @@
 import React from "react";
 
-const ButtonLoading = ({ loading }) => {
+const ButtonLoading = ({ loading, handleSubmit, text }) => {
   return !loading ? (
     <button
       onClick={handleSubmit}
       className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
     >
-      Submit
+      {text}
     </button>
   ) : (
     <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">

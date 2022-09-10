@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
+import ButtonLoading from "../components/ButtonLoading";
 import ProtectedLayout from "../components/ProtectedLayout";
 import { web3Context } from "../context/web3providerContext";
 import useContract from "../hooks/useContract";
@@ -8,13 +9,15 @@ const docLogin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [speciality, setSpeciality] = useState("");
-  const [qualificaton, setQualificaton] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [qualification, setQualification] = useState("");
   const [phno, setPhno] = useState("");
   const [hospital, setHospital] = useState("");
   const { web3Provider } = useContext(web3Context);
   const router = useRouter();
 
   const handleSubmit = async () => {
+    setLoading(true);
     const [account] = await web3Provider.eth.getAccounts();
     console.log(account);
     const instance = useContract(web3Provider);
@@ -25,6 +28,7 @@ const docLogin = () => {
           from: account,
         });
     } catch (err) {}
+    setLoading(false);
   };
 
   return (
@@ -108,8 +112,8 @@ const docLogin = () => {
                     type="text"
                     id="qualification"
                     name="qualification"
-                    value={qualificaton}
-                    onChange={(e) => setQualificaton(e.target.value)}
+                    value={qualification}
+                    onChange={(e) => setQualification(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
@@ -152,12 +156,7 @@ const docLogin = () => {
               </div>
 
               <div className="p-2 w-full">
-                <button
-                  onClick={handleSubmit}
-                  className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-                >
-                  Submit
-                </button>
+                <ButtonLoading loading={loading} handleSubmit={handleSubmit} />
               </div>
             </div>
           </div>

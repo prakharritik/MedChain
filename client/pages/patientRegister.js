@@ -167,7 +167,7 @@ const patientReg = () => {
               </div>
 
               <div className="p-2 w-full">
-                <ButtonLoading loading={loading} />
+                <ButtonLoading loading={loading} handleSubmit={handleSubmit} />
               </div>
             </div>
           </div>

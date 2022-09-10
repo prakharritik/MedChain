@@ -57,7 +57,7 @@ const profileAccess = () => {
               <div class="lg:w-2/3 flex flex-col justify-between sm:flex-row sm:items-center items-start mx-auto">
                 <div>
                   <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
-                    sriracha forage.
+                    {name}
                   </h1>
                   <p className="font-small">{account}</p>
                 </div>

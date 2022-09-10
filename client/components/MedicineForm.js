@@ -48,9 +48,7 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
   });
 }
 
-function MedicineForm() {
-  const [rowsData, setRowsData] = useState([]);
-
+function MedicineForm({ medicines: rowsData, setMedicines: setRowsData }) {
   const addTableRows = () => {
     const rowsInput = {
       Medicine: "",

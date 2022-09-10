@@ -39,9 +39,7 @@ function TableRows({ rowsData, deleteTableRows, handleChange }) {
   });
 }
 
-function MedicalTest() {
-  const [rowsData, setRowsData] = useState([]);
-
+function MedicalTest({ tests: rowsData, setTests: setRowsData }) {
   const addTableRows = () => {
     const rowsInput = {
       Name: "",

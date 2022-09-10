@@ -4,18 +4,20 @@ import useContract from "../hooks/useContract";
 import { useRouter } from "next/router";
 
 const AddProfileAccess = () => {
+  const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
   const { web3Provider } = useContext(web3Context);
   const router = useRouter();
 
   const onSubmit = async () => {
+    setLoading(true);
     const [account] = await web3Provider.eth.getAccounts();
     console.log(account);
     const instance = useContract(web3Provider);
     const res = await instance.methods.grantAccess(address).send({
       from: account,
     });
-    router.reload();
+    setLoading(false);
   };
   return (
     <section class="text-gray-600 body-font">

@@ -1,21 +1,46 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { web3Context } from "../context/web3providerContext";
 // import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
-const navigation = [
-  { name: "Dashboard", href: "/patientProfile", current: true },
-  { name: "Profile Access", href: "/profileAccess", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
+  const { role } = useContext(web3Context);
+  let navigation;
+
+  switch (role) {
+    case 0:
+      navigation = [{ name: "Admin", href: "/admin" }];
+      break;
+    case 1:
+      navigation = [
+        { name: "Dashboard", href: "/patientProfile", current: true },
+        { name: "Profile Access", href: "/profileAccess", current: false },
+      ];
+      break;
+    case 2:
+      navigation = [
+        { name: "Dashboard", href: "/docDash", current: true },
+        { name: "Access List", href: "/accessList", current: false },
+      ];
+      break;
+    case 3:
+      navigation = [
+        { name: "Dashboard", href: "/patientProfile", current: true },
+        { name: "Profile Access", href: "/profileAccess", current: false },
+      ];
+      break;
+    default:
+      navigation = [
+        { name: "Dashboard", href: "/patientProfile", current: true },
+        { name: "Profile Access", href: "/profileAccess", current: false },
+      ];
+  }
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
