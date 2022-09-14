@@ -1,7 +1,7 @@
 import React from "react";
 import RecordRow from "./RecordRow";
 
-const Records = ({ records }) => {
+const Records = ({ records, account }) => {
   return records.length === 0 ? (
     <div className="py-24 text-center text-medium">No records.</div>
   ) : (
@@ -22,7 +22,7 @@ const Records = ({ records }) => {
         </thead>
         <tbody>
           {records.map((record) => (
-            <RecordRow record={record} />
+            <RecordRow record={record} account={account} />
           ))}
         </tbody>
       </table>

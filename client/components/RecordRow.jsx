@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React from "react";
 
-const RecordRow = ({ record: { id, conclusion, hashURL } }) => {
+const RecordRow = ({ record: { id, conclusion, hashURL }, account }) => {
   return (
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <th
@@ -12,12 +13,11 @@ const RecordRow = ({ record: { id, conclusion, hashURL } }) => {
       <td class="py-4 px-6">{conclusion}</td>
 
       <td class="py-4 px-6">
-        <a
-          href={hashURL}
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-        >
-          View
-        </a>
+        <Link href={`/RecordView?address=${account}&id=${id}`}>
+          <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+            View
+          </a>
+        </Link>
       </td>
     </tr>
   );

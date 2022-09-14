@@ -100,7 +100,7 @@ const docDash = () => {
       ) : (
         <div class="flex flex-col text-center w-full mb-12">
           <h1 class="sm:text-3xl text-xl font-medium title-font mb-4 text-gray-900">
-            Profile Not Verifed
+            Profile Not Verified
           </h1>
         </div>
       )}

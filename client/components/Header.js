@@ -31,8 +31,10 @@ export default function Header() {
       break;
     case 3:
       navigation = [
-        { name: "Dashboard", href: "/patientProfile", current: true },
-        { name: "Profile Access", href: "/profileAccess", current: false },
+        { name: "Dashboard", href: "/insDash", current: true },
+        { name: "Policies", href: "/policies", current: false },
+        { name: "Claims", href: "/claims", current: false },
+        { name: "Withdraw", href: "/withdraw", current: false },
       ];
       break;
     default:
@@ -87,18 +89,20 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center md:justify-between sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
+                <Link href="/">
+                  <div className="flex flex-shrink-0 items-center">
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                  </div>
+                </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (

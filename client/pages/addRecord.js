@@ -14,13 +14,14 @@ import useContract from "../hooks/useContract";
 const addRecord = () => {
   const router = useRouter();
   const { web3Provider } = useContext(web3Context);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [profile, setProfile] = useState(null);
   const [tests, setTests] = useState([]);
   const [conclusion, setConclusion] = useState("");
   const [important, setImportant] = useState(false);
   const [medicines, setMedicines] = useState([]);
   const [symptoms, setSymptoms] = useState([]);
+  const [amount, setAmount] = useState(8);
   const address = router.query.address;
 
   useEffect(() => {
@@ -53,7 +54,15 @@ const addRecord = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const record = { symptoms, medicines, tests, conclusion, important };
+    const record = {
+      symptoms,
+      medicines,
+      tests,
+      conclusion,
+      important,
+      patient: { address },
+      amount,
+    };
     try {
       let cid = await getCid(JSON.stringify(record));
       let patientAddress = address;
@@ -146,6 +155,22 @@ const addRecord = () => {
                 Important
               </span>
             </label>
+          </div>
+          <div class="flex w-full  justify-center items-end">
+            <div class="relative mr-4  lg:w-1/4 xl:w-1/2 w-2/4">
+              <label for="hero-field" class="leading-7 text-sm text-gray-600">
+                Amount / Fee charged in Wei (1 Wei = 12.17 Rs)
+              </label>
+              <input
+                type="number"
+                id="hero-field"
+                name="hero-field"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                class="w-full  rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            {amount * 12.17}
           </div>
           <div className="flex items-center">
             <input

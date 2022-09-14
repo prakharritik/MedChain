@@ -37,6 +37,7 @@ const Tabs = () => {
           email: res["email"],
           name: res["name"],
           phno: res["phno"],
+          account,
         });
       }
     };
@@ -127,13 +128,16 @@ const Tabs = () => {
                     className={openTab === 2 ? "block" : "hidden"}
                     id="link2"
                   >
-                    <Records records={records} />
+                    <Records
+                      records={records.filter((record) => record.important)}
+                      account={profile.account}
+                    />
                   </div>
                   <div
                     className={openTab === 3 ? "block" : "hidden"}
                     id="link3"
                   >
-                    <Records records={records} />
+                    <Records records={records} account={profile.account} />
                   </div>
                 </div>
               </div>
