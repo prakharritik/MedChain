@@ -156,7 +156,11 @@ const docLogin = () => {
               </div>
 
               <div className="p-2 w-full">
-                <ButtonLoading loading={loading} handleSubmit={handleSubmit} />
+                <ButtonLoading
+                  loading={loading}
+                  handleSubmit={handleSubmit}
+                  text="Submit"
+                />
               </div>
             </div>
           </div>

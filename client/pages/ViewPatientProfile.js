@@ -126,13 +126,16 @@ const Tabs = () => {
                     className={openTab === 2 ? "block" : "hidden"}
                     id="link2"
                   >
-                    <Records records={records} />
+                    <Records
+                      records={records.filter((record) => record.important)}
+                      account={account}
+                    />
                   </div>
                   <div
                     className={openTab === 3 ? "block" : "hidden"}
                     id="link3"
                   >
-                    <Records records={records} />
+                    <Records records={records} account={account} />
                   </div>
                 </div>
               </div>

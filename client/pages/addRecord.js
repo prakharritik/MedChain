@@ -70,7 +70,7 @@ const addRecord = () => {
       const [account] = await web3Provider.eth.getAccounts();
       console.log(account);
       const res = await instance.methods
-        .addRecord(patientAddress, cid, conclusion, important)
+        .addRecord(patientAddress, cid, conclusion, important, amount)
         .send({
           from: account,
         });

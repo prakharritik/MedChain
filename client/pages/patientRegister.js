@@ -38,6 +38,7 @@ const patientReg = () => {
           from: account,
         });
       console.log(res);
+      router.push("/patientProfile");
       setLoading(false);
     }
   };
@@ -167,7 +168,11 @@ const patientReg = () => {
               </div>
 
               <div className="p-2 w-full">
-                <ButtonLoading loading={loading} handleSubmit={handleSubmit} />
+                <ButtonLoading
+                  loading={loading}
+                  handleSubmit={handleSubmit}
+                  text="Submit"
+                />
               </div>
             </div>
           </div>

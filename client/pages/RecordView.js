@@ -22,6 +22,7 @@ const RecordView = (props) => {
     const conn = async () => {
       const instance = useContract(web3Provider);
       const [acc] = await web3Provider.eth.getAccounts();
+
       if (acc === account) setShowInsurance(true);
       const res = await instance.methods.getPatient(account).call();
       console.log(res);
@@ -51,6 +52,7 @@ const RecordView = (props) => {
 
     setLoading(false);
   }, []);
+
   return (
     <ProtectedLayout>
       {loading || !profile || !recordData ? (

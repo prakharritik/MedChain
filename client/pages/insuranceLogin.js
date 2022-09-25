@@ -1,58 +1,51 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useState } from "react";
+import ButtonLoading from "../components/ButtonLoading";
+import ProtectedLayout from "../components/ProtectedLayout";
+import { web3Context } from "../context/web3providerContext";
 
-const docLogin = () => {
+import useContractInsFactory from "../hooks/useContractInsFactory";
+
+const insuranceLogin = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  const [phno, setPhno] = useState("");
+
+  const { web3Provider } = useContext(web3Context);
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const [account] = await web3Provider.eth.getAccounts();
+    console.log(account);
+    const instance = useContractInsFactory(web3Provider);
+    try {
+      const res = await instance.methods.addRequest(name, email, phno).send({
+        from: account,
+      });
+    } catch (err) {}
+    setLoading(false);
+  };
+
   return (
-    <div>
-      <div className="my-5 lg:w-2/6 md:w-1/2 bg-gray-900 rounded-lg p-8  flex flex-col md:m-auto w-full shadow-2lg shadow-indigo-500/40">
-        <h2 className="text-gray-100 text-lg font-medium title-font mb-5">
-          Sign Up
-        </h2>
-        <div className="relative mb-4">
-          <label
-            htmlFor="full-name"
-            className="leading-7 text-sm text-gray-600"
-          >
-            Full Name
-          </label>
-          <input
-            type="text"
-            id="full-name"
-            name="full-name"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <div className="relative mb-4">
-          <label htmlFor="email" className="leading-7 text-sm text-gray-600">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <button className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Button
-        </button>
-        <p className="text-xs text-gray-500 mt-3">
-          Literally you probably haven't heard of them jean shorts.
-        </p>
-      </div>
+    <ProtectedLayout>
       <section className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-              Doctor Registraiton
+              Insurance Registeration
             </h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify.
+              Please fill the following details. They will be used in
+              verification.
             </p>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
             <div className="flex flex-wrap -m-2">
-              <div className="p-2 w-1/2">
+              <div className="p-2 w-full">
                 <div className="relative">
                   <label
                     htmlFor="name"
@@ -64,6 +57,8 @@ const docLogin = () => {
                     type="text"
                     id="name"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
@@ -80,55 +75,46 @@ const docLogin = () => {
                     type="email"
                     id="email"
                     name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
+
               <div className="p-2 w-1/2">
                 <div className="relative">
                   <label
-                    htmlFor="Speciality"
+                    htmlFor="phno"
                     className="leading-7 text-sm text-gray-600"
                   >
-                    Speciality
+                    Phone Number
                   </label>
                   <input
                     type="text"
-                    id="Speciality"
-                    name="Speciality"
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  />
-                </div>
-              </div>
-              <div className="p-2 w-1/2">
-                <div className="relative">
-                  <label
-                    htmlFor="Qualification"
-                    className="leading-7 text-sm text-gray-600"
-                  >
-                    Qualification
-                  </label>
-                  <input
-                    type="text"
-                    id="qualification"
-                    name="qualification"
+                    id="phno"
+                    name="phno"
+                    value={phno}
+                    onChange={(e) => setPhno(e.target.value)}
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   />
                 </div>
               </div>
 
               <div className="p-2 w-full">
-                <button className="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-                  Button
-                </button>
+                <ButtonLoading
+                  loading={loading}
+                  handleSubmit={handleSubmit}
+                  text="Submit"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
       ;
-    </div>
+    </ProtectedLayout>
   );
 };
 
-export default docLogin;
+export default insuranceLogin;

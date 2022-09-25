@@ -20,15 +20,15 @@ const Tabs = () => {
     setLoading(true);
 
     const conn = async () => {
-      const [account] = await web3Provider.eth.getAccounts();
+      try {
+        const [account] = await web3Provider.eth.getAccounts();
 
-      const instance = useContract(web3Provider);
-      const res = await instance.methods.getPatient(account).call();
-      const records = await instance.methods.getRecords(account).call();
-      setRecords(records);
-      console.log(records);
-      if (res["name"] == "") router.push("/patientRegister");
-      else {
+        const instance = useContract(web3Provider);
+        const res = await instance.methods.getPatient(account).call();
+        const records = await instance.methods.getRecords(account).call();
+        setRecords(records);
+        console.log(records);
+
         setProfile({
           city: res["city"],
           dob: res["dob"],
@@ -39,6 +39,9 @@ const Tabs = () => {
           phno: res["phno"],
           account,
         });
+      } catch (err) {
+        console.log(err);
+        router.push("/patientRegister");
       }
     };
     conn();

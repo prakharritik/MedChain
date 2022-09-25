@@ -21,6 +21,11 @@ export default function Header() {
       navigation = [
         { name: "Dashboard", href: "/patientProfile", current: true },
         { name: "Profile Access", href: "/profileAccess", current: false },
+        {
+          name: "Insurance Management",
+          href: "/manageInsurance",
+          current: false,
+        },
       ];
       break;
     case 2:
@@ -35,6 +40,11 @@ export default function Header() {
         { name: "Policies", href: "/policies", current: false },
         { name: "Claims", href: "/claims", current: false },
         { name: "Withdraw", href: "/withdraw", current: false },
+        {
+          name: "Customer Requests",
+          href: "/ViewCustomerRequests",
+          current: false,
+        },
       ];
       break;
     default:
