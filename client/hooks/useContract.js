@@ -40,6 +40,19 @@ const abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_insurance",
+        type: "address",
+      },
+    ],
+    name: "addInsurance",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "string",
         name: "name",
         type: "string",
@@ -125,6 +138,11 @@ const abi = [
         name: "important",
         type: "bool",
       },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
     ],
     name: "addRecord",
     outputs: [],
@@ -152,6 +170,11 @@ const abi = [
         internalType: "bool",
         name: "important",
         type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
       },
     ],
     name: "addRecordPath",
@@ -539,6 +562,11 @@ const abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
             internalType: "string",
             name: "hashURL",
             type: "string",
@@ -577,6 +605,11 @@ const abi = [
           {
             internalType: "uint256",
             name: "id",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
             type: "uint256",
           },
           {
@@ -627,7 +660,7 @@ const abi = [
 const useContract = (web3) => {
   const instance = new web3.eth.Contract(
     abi,
-    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS
+    process.env.NEXT_PUBLIC_CONTRACT_ADDRESS_G
   );
   return instance;
 };
