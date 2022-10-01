@@ -55,7 +55,7 @@ const policies = () => {
       console.log(account);
       const instance = useContractInsurance(web3Provider, profile.insurance);
       const res = await instance.methods
-        .addPolicy(pdetails, pduration, pamount)
+        .addPolicy(pdetails, pduration*2592000000 , pamount)
         .send({ from: account });
       //  Router.reload(window.location.pathname);
     } catch (err) {}

@@ -36,7 +36,7 @@ const InsuranceCard = ({ insuranceAddress, web3Provider }) => {
       const instance = useContractInsurance(web3Provider, insuranceAddress);
       const res = await instance.methods.payPremium().send({
         from: account,
-        value: 1000000000000,
+        value: policyDetails["premiumAmount"],
       });
       console.log(res);
       router.push("/manageInsurance");
