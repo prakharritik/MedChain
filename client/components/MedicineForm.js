@@ -70,7 +70,7 @@ function MedicineForm({ medicines: rowsData, setMedicines: setRowsData }) {
     setRowsData(rowsInput);
   };
   return (
-    <div className="mb-5">
+    <div className="mb-5 py-24">
       <h1 class="text-center sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
         Medicines
       </h1>

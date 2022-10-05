@@ -39,7 +39,7 @@ export default function SymptomsForm({ symptoms, setSymptoms }) {
   }
 
   return (
-    <div>
+    <div className="">
       <form onSubmit={handleFormSubmit}>
         <div className=" rounded-lg p-8 flex flex-col md:m-auto w-full mt-10 md:mt-0">
           <h1 class="text-center sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">

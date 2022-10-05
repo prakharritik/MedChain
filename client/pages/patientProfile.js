@@ -25,6 +25,8 @@ const Tabs = () => {
 
         const instance = useContract(web3Provider);
         const res = await instance.methods.getPatient(account).call();
+        if (res["name"] == "") router.push("/patientRegister");
+
         const records = await instance.methods.getRecords(account).call();
         setRecords(records);
         console.log(records);
@@ -41,13 +43,12 @@ const Tabs = () => {
         });
       } catch (err) {
         console.log(err);
-        router.push("/patientRegister");
       }
     };
     conn();
 
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>

@@ -68,7 +68,7 @@ const Admin = () => {
     fetchList();
     fetchInsList();
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>

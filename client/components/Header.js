@@ -11,6 +11,7 @@ function classNames(...classes) {
 
 export default function Header() {
   const { role } = useContext(web3Context);
+  console.log(role);
   let navigation;
 
   switch (role) {
@@ -38,7 +39,7 @@ export default function Header() {
       navigation = [
         { name: "Dashboard", href: "/insDash", current: true },
         { name: "Policies", href: "/policies", current: false },
-        { name: "Claims", href: "/claims", current: false },
+        { name: "Claims", href: "/ViewClaims", current: false },
         { name: "Withdraw", href: "/withdraw", current: false },
         {
           name: "Customer Requests",

@@ -38,7 +38,7 @@ const docDash = () => {
     conn();
 
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
   return (
     <ProtectedLayout>
       {loading || !profile ? (

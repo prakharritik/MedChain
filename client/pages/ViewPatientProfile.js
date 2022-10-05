@@ -42,7 +42,7 @@ const Tabs = () => {
     conn();
 
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>

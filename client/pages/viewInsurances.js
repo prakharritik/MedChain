@@ -28,7 +28,7 @@ const accessList = () => {
 
     fetchInsurances();
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>

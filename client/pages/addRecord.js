@@ -43,7 +43,7 @@ const addRecord = () => {
       }
     };
     conn();
-  }, []);
+  }, [web3Provider]);
 
   const getCid = async (record) => {
     const ipfs = await IPFS.create();

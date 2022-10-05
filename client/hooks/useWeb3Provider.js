@@ -21,15 +21,17 @@ const providerOptions = {
   },
 };
 
+let web3Modal;
+if (typeof window !== "undefined") {
+  web3Modal = new Web3Modal({
+    cacheProvider: true,
+    providerOptions,
+  });
+}
 const useWeb3Provider = async () => {
   let web3 = null;
 
   try {
-    let web3Modal = new Web3Modal({
-      cacheProvider: false,
-      providerOptions,
-    });
-
     const web3ModalInstance = await web3Modal.connect();
     //   const web3 = new ethers.providers.Web3Provider(web3ModalInstance);
     web3 = new Web3(web3ModalInstance);

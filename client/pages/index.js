@@ -25,6 +25,7 @@ const index = () => {
     if (web3) {
       setWeb3Provider(web3);
       setRole(num);
+      localStorage.setItem("role", num);
       if (num === 1) router.push("patientProfile");
       else if (num === 2) router.push("docDash");
       else if (num === 3) router.push("insDash");

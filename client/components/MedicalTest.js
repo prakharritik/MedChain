@@ -60,7 +60,7 @@ function MedicalTest({ tests: rowsData, setTests: setRowsData }) {
     setRowsData(rowsInput);
   };
   return (
-    <div className="mb-5">
+    <div className="mb-5 pb-24">
       <h1 class="text-center sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
         Tests
       </h1>

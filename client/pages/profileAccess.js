@@ -10,7 +10,7 @@ const profileAccess = () => {
   const [loading, setLoading] = useState(false);
   const { web3Provider } = useContext(web3Context);
   const [accessList, setAccessList] = useState([]);
-
+  console.log(web3Provider);
   const fetchAccessList = async () => {
     try {
       const [account] = await web3Provider.eth.getAccounts();
@@ -43,7 +43,7 @@ const profileAccess = () => {
 
     fetchAccessList();
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>
@@ -53,7 +53,7 @@ const profileAccess = () => {
       ) : (
         <section class="text-gray-600 body-font">
           {accessList.map(({ account, name, index }) => (
-            <div class="container px-5 py-10 mx-auto">
+            <div class="container px-5 py-10 mx-auto" key={account}>
               <div class="lg:w-2/3 flex flex-col justify-between sm:flex-row sm:items-center items-start mx-auto">
                 <div>
                   <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">

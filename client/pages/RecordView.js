@@ -18,19 +18,17 @@ const RecordView = (props) => {
   const [showInsurance, setShowInsurance] = useState(false);
 
   const applyClaim = async () => {
-    setLoading(true)
-    console.log(record['amount']);
+    setLoading(true);
+    console.log(record["amount"]);
     try {
-
-     const instance = useContractInsurance(web3Provider, profile['insurance'])
-     const [acc] = await web3Provider.eth.getAccounts();
-     await instance.methods.addClaim(id, record['amount']).send({from: acc});
-
+      const instance = useContractInsurance(web3Provider, profile["insurance"]);
+      const [acc] = await web3Provider.eth.getAccounts();
+      await instance.methods.addClaim(id, record["amount"]).send({ from: acc });
     } catch (err) {
       console.log(err);
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +65,7 @@ const RecordView = (props) => {
     conn();
 
     setLoading(false);
-  }, []);
+  }, [web3Provider]);
 
   return (
     <ProtectedLayout>
@@ -124,7 +122,10 @@ const RecordView = (props) => {
                   <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">
                     Apply for insurance claim for this record.
                   </h1>
-                  <button onClick={applyClaim} class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0">
+                  <button
+                    onClick={applyClaim}
+                    class="flex-shrink-0 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg mt-10 sm:mt-0"
+                  >
                     Apply
                   </button>
                 </div>
